@@ -387,6 +387,8 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.SHA1PasswordHasher',
 ]
 
+FEATURE_LOG_SOUND_DOWNLOADS = False
+
 # Place settings which depend on other settings potentially modified in local_settings.py BELOW the
 # local settings import
 from local_settings import *

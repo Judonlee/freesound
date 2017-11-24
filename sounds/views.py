@@ -316,10 +316,11 @@ def sound_download(request, username, sound_id):
     if sound.user.username.lower() != username.lower():
         raise Http404
 
-    sentry_logger.info('Download sound', exc_info=True, extra={
-        'request': request,
-        'tags': {'sound_id': sound_id},
-    })
+    if settings.FEATURE_LOG_SOUND_DOWNLOADS:
+        sentry_logger.info('Download sound', exc_info=True, extra={
+            'request': request,
+            'tags': {'sound_id': sound_id},
+        })
 
     if not Download.objects.filter(user=request.user, sound=sound).exists():
         Download.objects.create(user=request.user, sound=sound, license=sound.license)
@@ -334,10 +335,11 @@ def pack_download(request, username, pack_id):
     if pack.user.username.lower() != username.lower():
         raise Http404
 
-    sentry_logger.info('Download pack', exc_info=True, extra={
-        'request': request,
-        'tags': {'pack_id': pack_id},
-    })
+    if settings.FEATURE_LOG_SOUND_DOWNLOADS:
+        sentry_logger.info('Download pack', exc_info=True, extra={
+            'request': request,
+            'tags': {'pack_id': pack_id},
+        })
 
     if not Download.objects.filter(user=request.user, pack=pack).exists():
         Download.objects.create(user=request.user, pack=pack)
