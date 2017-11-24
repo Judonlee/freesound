@@ -318,7 +318,7 @@ def sound_download(request, username, sound_id):
 
     sentry_logger.info('Download sound', exc_info=True, extra={
         'request': request,
-        'sound_id': sound_id,
+        'tags': {'sound_id': sound_id},
     })
 
     if not Download.objects.filter(user=request.user, sound=sound).exists():
@@ -336,7 +336,7 @@ def pack_download(request, username, pack_id):
 
     sentry_logger.info('Download pack', exc_info=True, extra={
         'request': request,
-        'pack_id': pack_id,
+        'tags': {'pack_id': pack_id},
     })
 
     if not Download.objects.filter(user=request.user, pack=pack).exists():
